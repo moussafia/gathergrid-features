@@ -1,8 +1,8 @@
-package com.gathergrid.gathergridfeatures.controllers;
+package com.gathergrid.gathergridfeatures.controller;
 
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.servlet.annotation.WebServlet;
+        import jakarta.persistence.EntityManagerFactory;
+        import jakarta.persistence.Persistence;
+        import jakarta.servlet.annotation.WebServlet;
 
 @WebServlet(loadOnStartup = 1)
 public class InitialServlet extends HelloServlet {
