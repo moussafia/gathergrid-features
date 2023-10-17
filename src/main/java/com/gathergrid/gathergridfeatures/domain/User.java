@@ -2,7 +2,6 @@ package com.gathergrid.gathergridfeatures.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
@@ -22,7 +21,6 @@ public class User {
     @Column(unique = true)
     @Email
     private String email;
-    @Min(value = 8)
     private String password;
 
     @OneToMany(mappedBy = "organizer")
@@ -41,6 +39,30 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public long getId() {
