@@ -1,4 +1,4 @@
-package com.gathergrid.gathergridfeatures.controllers;
+package com.gathergrid.gathergridfeatures.controller;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
