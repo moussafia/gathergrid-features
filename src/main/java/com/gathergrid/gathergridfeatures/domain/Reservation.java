@@ -20,6 +20,26 @@ public class Reservation {
 
     public Reservation() {}
 
+    public Reservation(LocalDateTime reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
     public long getId() {
         return id;
     }
