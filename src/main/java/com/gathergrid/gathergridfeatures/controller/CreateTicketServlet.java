@@ -16,22 +16,17 @@ import java.io.IOException;
 
 @WebServlet("/create-ticket")
 public class CreateTicketServlet extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer price = Integer.valueOf(req.getParameter("ticketPrice"));
-        Integer quantity = Integer.valueOf(req.getParameter("ticketQuantity"));
+        int price = Integer.parseInt(req.getParameter("ticketPrice"));
+        int quantity = Integer.parseInt(req.getParameter("ticketQuantity"));
         String type = req.getParameter("ticketType");
-        Integer eventId = 1;
 
         EntityManager entityManager = EntityManagerUtil.getEntityManager();
         TicketRepository ticketRepository = new TicketRepository(entityManager);
         TicketService ticketService = new TicketService(ticketRepository);
 
         Ticket ticket = new Ticket(price, quantity, TicketType.VIP);
-
-
-
-
+        ticketService.createTicket(ticket);
     }
 }
