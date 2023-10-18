@@ -15,7 +15,7 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public Event createEvent(Event event) {
+    public Event save(Event event) {
         em.getTransaction().begin();
         em.persist(event);
         em.getTransaction().commit();
@@ -23,7 +23,7 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public void deleteEvent(long id) {
+    public void delete(long id) {
         em.getTransaction().begin();
         Event event = em.find(Event.class, id);
         if (event != null) {
@@ -33,10 +33,11 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public void updateEvent(Event event) {
+    public Event update(Event event) {
         em.getTransaction().begin();
         em.merge(event);
         em.getTransaction().commit();
+        return event;
     }
 
     @Override
