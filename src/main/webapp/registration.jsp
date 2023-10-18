@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,13 +25,30 @@
 				<div class="signup-content">
 					<div class="signup-form">
 						<h2 class="form-title">Sign up</h2>
+
+						<%-- Check if validation errors exist --%>
+						<c:if test="${not empty validationErrors}">
+							<div class="error-messages">
+								<h3>Please correct the following errors:</h3>
+								<ul>
+									<c:forEach items="${validationErrors}" var="error">
+										<li>${error}</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</c:if>
 					
-						<form method="" action="" class="register-form"
+						<form  method="post" action="registrationServlet" class="register-form"
 							id="register-form">
 							<div class="form-group">
-								<label for="name"><i
+								<label for="firstName"><i
 									class="zmdi zmdi-account material-icons-name"></i></label> <input
-									type="text" name="name" id="name" placeholder="Your Name" />
+									type="text" name="firstName" id="firstName" placeholder="Your firstName" />
+							</div>
+							<div class="form-group">
+								<label for="lastname"><i
+										class="zmdi zmdi-account material-icons-name"></i></label> <input
+									type="text" name="lastName" id="lastname" placeholder="Your lastName" />
 							</div>
 							<div class="form-group">
 								<label for="email"><i class="zmdi zmdi-email"></i></label> <input
@@ -39,16 +58,7 @@
 								<label for="pass"><i class="zmdi zmdi-lock"></i></label> <input
 									type="password" name="pass" id="pass" placeholder="Password" />
 							</div>
-							<div class="form-group">
-								<%--@declare id="re-pass"--%><label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-								<input type="password" name="re_pass" id="re_pass"
-									placeholder="Repeat your password" />
-							</div>
-							<div class="form-group">
-								<label for="contact"><i class="zmdi zmdi-lock-outline"></i></label>
-								<input type="text" name="contact" id="contact"
-									placeholder="Contact no" />
-							</div>
+
 							<div class="form-group">
 								<input type="checkbox" name="agree-term" id="agree-term"
 									class="agree-term" /> <label for="agree-term"
@@ -82,5 +92,4 @@
 
 
 </body>
-<!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

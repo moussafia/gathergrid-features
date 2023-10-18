@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +32,11 @@
 					</div>
 
 					<div class="signin-form">
+
+						<c:if test="${not empty message}">
+							<p>${message}</p>
+						</c:if>
+
 						<h2 class="form-title">Sign up</h2>
 						<form method="" action="" class="register-form"
 							id="login-form">
@@ -77,5 +84,4 @@
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="js/main.js"></script>
 </body>
-<!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
