@@ -13,9 +13,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/create-ticket")
-public class CreateTicketServlet extends HttpServlet {
+public class TicketServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int price = Integer.parseInt(req.getParameter("ticketPrice"));
@@ -26,7 +27,22 @@ public class CreateTicketServlet extends HttpServlet {
         TicketRepository ticketRepository = new TicketRepository(entityManager);
         TicketService ticketService = new TicketService(ticketRepository);
 
+
         Ticket ticket = new Ticket(price, quantity, TicketType.VIP);
         ticketService.createTicket(ticket);
+
+//        ticketService.deleteTicket(1);
+
+//        List<Ticket> ticketList = ticketService.findAllTickets();
+//        resp.setContentType("text/html");
+//        resp.getWriter().println("<h1>List all tickets :</h1>");
+//        resp.getWriter().println("<ul>");
+//        for(Ticket t : ticketList){
+//            resp.getWriter().println("<li>Price: " + t.getPrice()+ ", Quantity: " + t.getQuantityAvailable() + ", Type: " + t.getType() + "</li>");
+//        }
+//        resp.getWriter().println("</ul>");
+
+
+
     }
 }
