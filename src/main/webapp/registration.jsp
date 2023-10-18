@@ -28,7 +28,7 @@
 
 						<%-- Check if validation errors exist --%>
 						<c:if test="${not empty validationErrors}">
-							<div class="error-messages">
+							<div class="error-messages" id="error-container">
 								<h3>Please correct the following errors:</h3>
 								<ul>
 									<c:forEach items="${validationErrors}" var="error">
