@@ -23,6 +23,14 @@ public class Category {
         this.name = name;
     }
 
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
     public long getId() {
         return id;
     }
