@@ -18,7 +18,5 @@
 
         <input type="submit" value="Create Ticket">
     </form>
-    <br>
-    <a href="list-tickets">List All tickets</a>
 </body>
 </html>

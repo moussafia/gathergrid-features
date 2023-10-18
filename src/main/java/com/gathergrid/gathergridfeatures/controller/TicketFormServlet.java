@@ -13,9 +13,7 @@ import java.io.IOException;
 public class TicketFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String jspFile = "ticket-form.jsp";
-        RequestDispatcher dispatcher = request.getRequestDispatcher(jspFile);
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("/ticket-form.jsp").forward(request, response);
 
     }
 }
