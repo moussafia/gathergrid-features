@@ -22,7 +22,7 @@ public class User {
     @Column(unique = true)
     @Email
     private String email;
-    @Min(value = 8)
+
     private String password;
 
     @OneToMany(mappedBy = "organizer")

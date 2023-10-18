@@ -10,7 +10,7 @@ public class UserService {
     private final UserRepository<User> userRepository;
 
     public UserService() {
-        userRepository = new UserRepository<User>();
+        userRepository = new UserRepository<>();
     }
 
     public Optional<User> save(User user){
