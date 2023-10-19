@@ -8,12 +8,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Sign Up Form by Colorlib</title>
 
-<!-- Font Icon -->
-<link rel="stylesheet"
-	href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
-<!-- Main css -->
-<link rel="stylesheet" href="css/style.css">
+	<!-- Font Icon -->
+	<link rel="stylesheet" href="<c:url value="/fonts/material-icon/css/material-design-iconic-font.min.css"/>">
+	<!-- Main css -->
+	<link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 </head>
 <body>
 
@@ -28,7 +26,7 @@
 
 						<%-- Check if validation errors exist --%>
 						<c:if test="${not empty validationErrors}">
-							<div class="error-messages" id="error-container">
+						<div class="error-messages" id="error-container">
 								<h3>Please correct the following errors:</h3>
 								<ul>
 									<c:forEach items="${validationErrors}" var="error">
@@ -37,8 +35,13 @@
 								</ul>
 							</div>
 						</c:if>
-					
-						<form  method="post" action="registrationServlet" class="register-form"
+
+						<c:if test="${not empty message}">
+							<p>${message}</p>
+						</c:if>
+
+
+						<form  method="post" action="<c:url value='/auth/Signup'/>" class="register-form"
 							id="register-form">
 							<div class="form-group">
 								<label for="firstName"><i
@@ -74,9 +77,9 @@
 					</div>
 					<div class="signup-image">
 						<figure>
-							<img src="images/signup-image.jpg" alt="sing up image">
+							<img src="${pageContext.request.contextPath}/images/signup-image.jpg" alt="sing up image">
 						</figure>
-						<a href="login.jsp" class="signup-image-link">I am already
+						<a href="${pageContext.request.contextPath}/login.jsp" class="signup-image-link">I am already
 							member</a>
 					</div>
 				</div>
@@ -86,8 +89,8 @@
 
 	</div>
 	<!-- JS -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 
 

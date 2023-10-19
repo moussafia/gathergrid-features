@@ -9,11 +9,9 @@
 <title>Sign Up Form by Colorlib</title>
 
 <!-- Font Icon -->
-<link rel="stylesheet"
-	href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
+	<link rel="stylesheet" href="<c:url value="/fonts/material-icon/css/material-design-iconic-font.min.css"/>">
 <!-- Main css -->
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 </head>
 <body>
 
@@ -25,9 +23,9 @@
 				<div class="signin-content">
 					<div class="signin-image">
 						<figure>
-							<img src="images/signin-image.jpg" alt="sing up image">
+							<img src="${pageContext.request.contextPath}/images/signin-image.jpg" alt="sing up image">
 						</figure>
-						<a href="registration.jsp" class="signup-image-link">Create an
+						<a href="<c:url value='/registration.jsp' />" class="signup-image-link">Create an
 							account</a>
 					</div>
 
@@ -49,7 +47,7 @@
 								</ul>
 							</div>
 						</c:if>
-						<form method="post" action="LoginServlet" class="register-form"
+						<form method="post" action="<c:url value='/auth/signin'/>" class="register-form"
 							id="login-form">
 							<c:if test="${not empty validationEmail}">
 								<div class="error-messages" id="error-container">
@@ -102,7 +100,7 @@
 	</div>
 
 	<!-- JS -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>
