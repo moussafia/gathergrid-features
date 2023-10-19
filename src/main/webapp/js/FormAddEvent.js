@@ -22,6 +22,13 @@ $(document).ready(function() {
                     $(".select-type-ticket").prepend(`<option value="${option.value}"> ${option.typeTicket} </option>`)
                 }
             }
+            $(this).parent().html(`
+                    <button type="button"
+                        class="mt-10 p-2 bg-cl2 relative border rounded-md 
+                        hover:bg-hover2 font-bold text-sm remove_item_btn ">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                `)
         }else{
             e.preventDefault()
         }
@@ -40,19 +47,12 @@ $(document).ready(function() {
 
     $(document).on("click", ".remove_item_btn", function(e) {
         e.preventDefault()
-        if($("#show_item")[0].childElementCount == 1){
-            $(".remove_item_btn").prop("disabled", true)
-        }else{
-            $(".remove_item_btn").each(function(){
-                $(this).prop("disabled", false)
-            })
-            let selctedValue= $(this).parent().parent().parent().find("select option:selected");
-            isSelectedOption(selctedValue.val(), false)
-            let row_item = $(this).parent().parent().parent();
-            $(row_item).remove();
-
-            $("#show_item .select-type-ticket:first").prepend(`<option value="${selctedValue.val()}"> ${selctedValue.text()} </option>`)
-        }
+        let selctedValue= $(this).parent().parent().parent().find("select option:selected");
+        isSelectedOption(selctedValue.val(), false)
+        console.log($(this).parent().parent().parent());
+        let row_item = $(this).parent().parent().parent();
+        $(row_item).remove();
+        $("#show_item .select-type-ticket:first").prepend(`<option value="${selctedValue.val()}"> ${selctedValue.text()} </option>`)
     });
     function appendFormTicket() {
         let newFormTickets = $(`
@@ -75,11 +75,6 @@ $(document).ready(function() {
                             <button type="button" class="mt-10 p-2 bg-cl2 relative border rounded-md hover:bg-hover2 font-bold text-sm add_item_btn">
                                 <i class="fa-solid fa-plus"></i>                                    
                             </button>
-                            </div>
-                            <div class="pb-3 pl-2">
-                                <button type="button" class="mt-10 p-2 bg-danger relative border rounded-md hover:bg-hover2 font-bold text-sm remove_item_btn">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
                             </div>
                         </div>
                     </div>
