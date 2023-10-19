@@ -30,7 +30,7 @@ public class registrationServlet extends HttpServlet {
         String password = request.getParameter("pass");
 
         List<String> resultValidation = RegistrationValidation.registreValidation(firstName, lastName, email, password);
-        if (resultValidation.isEmpty()) {
+        if (!resultValidation.isEmpty()) {
             request.setAttribute("validationErrors", resultValidation);
             request.getRequestDispatcher("/registration.jsp").forward(request, response);
         } else {

@@ -37,9 +37,7 @@ public class RegistrationValidation {
     }
 
     public static String hashPassword(String plainPassword) {
-        String salt = BCrypt.gensalt(); // Generate a random salt
-        String hashedPassword = BCrypt.hashpw(plainPassword, salt); // Hash the password
-        return hashedPassword;
+        return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
     }
 }
 

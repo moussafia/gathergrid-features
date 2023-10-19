@@ -15,7 +15,7 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ServletException {
-        this.getServletContext().getRequestDispatcher("/login.jsp").forward(request,response);
+        this.getServletContext().getRequestDispatcher("/homeUser.jsp").forward(request,response);
     }
 
     public void destroy() {
