@@ -9,11 +9,9 @@
 <title>Sign Up Form by Colorlib</title>
 
 <!-- Font Icon -->
-<link rel="stylesheet"
-	href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
+	<link rel="stylesheet" href="<c:url value="/fonts/material-icon/css/material-design-iconic-font.min.css"/>">
 <!-- Main css -->
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 </head>
 <body>
 
@@ -25,9 +23,9 @@
 				<div class="signin-content">
 					<div class="signin-image">
 						<figure>
-							<img src="images/signin-image.jpg" alt="sing up image">
+							<img src="${pageContext.request.contextPath}/images/signin-image.jpg" alt="sing up image">
 						</figure>
-						<a href="registration.jsp" class="signup-image-link">Create an
+						<a href="<c:url value='/registration.jsp' />" class="signup-image-link">Create an
 							account</a>
 					</div>
 
@@ -38,14 +36,35 @@
 						</c:if>
 
 						<h2 class="form-title">Sign up</h2>
-						<form method="" action="" class="register-form"
-							id="login-form">
-							<div class="form-group">
-								<label for="username"><i
-									class="zmdi zmdi-account material-icons-name"></i></label> <input
-									type="text" name="username" id="username"
-									placeholder="Your Name" />
+						<%-- Check if validation errors exist --%>
+						<c:if test="${not empty validation}">
+							<div class="error-messages" id="error-container">
+								<h3>Please correct the following errors:</h3>
+								<ul>
+									<c:forEach items="${validation}" var="error">
+										<li>${error}</li>
+									</c:forEach>
+								</ul>
 							</div>
+						</c:if>
+						<form method="post" action="<c:url value='/auth/signin'/>" class="register-form"
+							id="login-form">
+							<c:if test="${not empty validationEmail}">
+								<div class="error-messages" id="error-container">
+								<p>${validationEmail}</p>
+								</div>
+							</c:if>
+							<div class="form-group">
+								<label for="email"><i
+									class="zmdi zmdi-account material-icons-name"></i></label> <input
+									type="text" name="email" id="email"
+									placeholder="Your email" />
+							</div>
+							<c:if test="${not empty validationPassword}">
+								<div class="error-messages" id="error-container">
+									<p>${validationPassword}</p>
+								</div>
+							</c:if>
 							<div class="form-group">
 								<label for="password"><i class="zmdi zmdi-lock"></i></label> <input
 									type="password" name="password" id="password"
@@ -81,7 +100,7 @@
 	</div>
 
 	<!-- JS -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>

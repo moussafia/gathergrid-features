@@ -2,6 +2,7 @@ package com.gathergrid.gathergridfeatures.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class User {
     @Column(unique = true)
     @Email
     private String email;
+
     private String password;
 
     @OneToMany(mappedBy = "organizer")
@@ -100,5 +102,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

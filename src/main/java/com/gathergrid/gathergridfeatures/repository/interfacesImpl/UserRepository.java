@@ -1,5 +1,6 @@
 package com.gathergrid.gathergridfeatures.repository.interfacesImpl;
 
+import com.gathergrid.gathergridfeatures.domain.Ticket;
 import com.gathergrid.gathergridfeatures.domain.User;
 import com.gathergrid.gathergridfeatures.utils.EntityManagerUtil;
 import jakarta.persistence.EntityManager;
