@@ -428,3 +428,7 @@ tbody tr .nomEntreprise a:hover {
         transition: 0.3s ease;
     }
 }
+#listEventBooked{
+    height: 93vh;
+    margin-top: 90px;
+}
