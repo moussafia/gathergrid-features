@@ -51,4 +51,5 @@ public class EventRepositoryImpl implements EventRepository {
         TypedQuery<Event> query = em.createQuery(jpql, Event.class);
         return query.getResultList();
     }
+
 }
