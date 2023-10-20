@@ -89,12 +89,6 @@
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
                             </div>
-                            <div class="ps-5 pb-3 pl-2">
-                                <button type="button"
-                                        class="mt-10 p-2 bg-cl2 relative border rounded-md hover:bg-hover2 font-bold text-sm remove_item_btn ">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </div>
                         </div>
                     </div>
                     <!--- child here -->
