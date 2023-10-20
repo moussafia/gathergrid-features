@@ -1,7 +1,7 @@
 <section id="sideBar" class="active">
     <div class="logo">
         <img src="https://cdn-icons-png.flaticon.com/512/780/780575.png" />
-        <h1>Events <sup>.ma</sup></h1>
+        <h1 class="pt-3 pl-2">Events <sup>.ma</sup></h1>
     </div>
     <div class="items">
         <a href="#">
