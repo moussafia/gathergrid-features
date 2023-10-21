@@ -18,6 +18,14 @@ public class Reservation {
     @ManyToOne
     private Ticket ticket;
 
+    public LocalDateTime getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(LocalDateTime reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
     public Reservation() {}
 
     public Reservation(LocalDateTime reservationDate) {
@@ -44,11 +52,9 @@ public class Reservation {
         return id;
     }
 
-    public LocalDateTime getReservationDate() {
-        return reservationDate;
-    }
-
-    public void setReservationDate(LocalDateTime reservationDate) {
+    public Reservation(LocalDateTime reservationDate, User user, Ticket ticket) {
         this.reservationDate = reservationDate;
+        this.user = user;
+        this.ticket = ticket;
     }
 }
