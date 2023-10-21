@@ -18,7 +18,7 @@
         </a>
         <a href="${pageContext.request.contextPath}/event">
             <li>
-                <i class="fa-duotone fa-briefcase" style="--fa-secondary-opacity: 1"></i><a href="#">Event</a>
+                <i class="fa-duotone fa-briefcase" style="--fa-secondary-opacity: 1"></i>Event
             </li>
         </a>
         <a href="${pageContext.request.contextPath}/myBooking">

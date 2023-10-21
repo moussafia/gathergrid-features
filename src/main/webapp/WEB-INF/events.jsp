@@ -1,16 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Youcode
-  Date: 20/10/2023
-  Time: 15:48
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="../components/header.jsp" />
+<c:import url="../components/sideBar.jsp" />
+<c:import url="../components/navBar.jsp" />
+<div id="homeAdmin">
+    <c:import url="../pages/events.jsp" />
+</div>
+<c:import url="../components/footer.jsp" />

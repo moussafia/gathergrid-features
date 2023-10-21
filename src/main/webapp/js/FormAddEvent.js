@@ -95,11 +95,3 @@ $(document).ready(function() {
     $("#dateEvent").flatpickr(optional_config);
 
 })
-
-
-$(document).on("submit","#containerForm-add", function(e){e.preventDefault()
-    $("#containerForm-add").find(":input").each(function(){
-        console.log($(this).val());
-        $(this).prop("disabled",false);
-    })
-})
