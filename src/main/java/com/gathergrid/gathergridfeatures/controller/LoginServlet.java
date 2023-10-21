@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class LoginServlet extends HelloServlet{
+public class LoginServlet extends pagesServlet {
     private UserService service ;
 
     @Override
