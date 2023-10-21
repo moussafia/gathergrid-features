@@ -30,7 +30,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
     public User() {}
@@ -46,6 +47,16 @@ public class User {
         return events;
     }
 
+    public void addEvent(Event event) {
+        event.setOrganizer(this);
+        events.add(event);
+    }
+
+    public void removeEvent(Event event) {
+        event.setOrganizer(null);
+        events.remove(event);
+    }
+
     public void setEvents(List<Event> events) {
         this.events = events;
     }
@@ -54,12 +65,22 @@ public class User {
         return reservations;
     }
 
+    public void addReservation(Reservation reservation) {
+        reservation.setUser(this);
+        reservations.add(reservation);
+    }
+
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
 
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public void addComment(Comment comment) {
+        comment.setUser(this);
+        comments.add(comment);
     }
 
     public void setComments(List<Comment> comments) {

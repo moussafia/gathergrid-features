@@ -63,12 +63,22 @@ public class Event {
         this.tickets = tickets;
     }
 
+    public void addTicket(Ticket ticket) {
+        ticket.setEvent(this);
+        tickets.add(ticket);
+    }
+
     public List<Comment> getComments() {
         return comments;
     }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void addComment(Comment comment) {
+        comment.setEvent(this);
+        comments.add(comment);
     }
 
     public Category getCategory() {
