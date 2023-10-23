@@ -11,7 +11,7 @@
     <div class="profile">
         <i class="far fa-bell notification"></i>
         <div class="flex flex-col justify-center justify-center">
-            <img src="avatarProfile.png" />
+            <img src="${pageContext.request.contextPath}avatarProfile.png" />
             <button id="dropdownVousButton" data-dropdown-toggle="dropdownVous" class="flex items-center">
                 <p class="text-sm">vous</p>
                 <i class="fa-duotone fa-caret-down text-sm px-0.5" style="--fa-secondary-opacity: 1"></i>

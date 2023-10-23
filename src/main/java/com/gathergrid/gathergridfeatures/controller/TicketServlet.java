@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/create-ticket")
 public class TicketServlet extends HttpServlet {
@@ -24,8 +23,8 @@ public class TicketServlet extends HttpServlet {
         String type = req.getParameter("ticketType");
 
         EntityManager entityManager = EntityManagerUtil.getEntityManager();
-        TicketRepository ticketRepository = new TicketRepository(entityManager);
-        TicketService ticketService = new TicketService(ticketRepository);
+        TicketRepository ticketRepository = new TicketRepository();
+        TicketService ticketService = new TicketService();
 
 
         Ticket ticket = new Ticket(price, quantity, TicketType.VIP);
