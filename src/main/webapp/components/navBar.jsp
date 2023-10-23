@@ -19,7 +19,11 @@
         </div>
     </div>
 </nav>
-
+<script>
+    function toggleSideBar() {
+        $("#sideBar").toggleClass('active')
+    }
+</script>
 <!---drop down--->
 <div id="dropdownVous"
      class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">

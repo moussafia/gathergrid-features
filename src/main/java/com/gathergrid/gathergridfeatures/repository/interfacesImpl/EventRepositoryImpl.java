@@ -5,15 +5,19 @@ import com.gathergrid.gathergridfeatures.repository.interfaces.EventRepository;
 import com.gathergrid.gathergridfeatures.utils.EntityManagerUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.Query;
 
 import java.util.List;
-import java.util.Optional;
 
 public class EventRepositoryImpl implements EventRepository {
     private final EntityManager em;
 
+    public EventRepositoryImpl(EntityManager em) {
+        this.em = em;
+    }
+
     public EventRepositoryImpl() {
-       em = EntityManagerUtil.getEntityManager();
+        em = EntityManagerUtil.getEntityManager();
     }
 
     @Override
@@ -43,18 +47,20 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public Optional<Event> find(long id) {
-        String jpql = "SELECT e FROM Event e where e.id = :id";
-        TypedQuery<Event> query = em.createQuery(jpql, Event.class).setParameter("id", id);
-        return query
-                .getResultStream()
-                .findAny();
+    public Event find(long id) {
+        return em.find(Event.class, id);
     }
 
     @Override
     public List<Event> findAll() {
         String jpql = "SELECT e FROM Event e";
         TypedQuery<Event> query = em.createQuery(jpql, Event.class);
+        return query.getResultList();
+    }
+    @Override
+    public List<Event> fetchCreatedEventOfUser(Long user_id) {
+        Query query = em.createQuery("select e from Event e where e.organizer.id = :user_id", Event.class);
+        query.setParameter("user_id", user_id);
         return query.getResultList();
     }
 

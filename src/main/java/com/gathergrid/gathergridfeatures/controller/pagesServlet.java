@@ -1,38 +1,49 @@
 package com.gathergrid.gathergridfeatures.controller;
 
 import java.io.*;
-import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
+import com.gathergrid.gathergridfeatures.domain.Category;
+import com.gathergrid.gathergridfeatures.domain.Event;
+import com.gathergrid.gathergridfeatures.service.CategoryService;
+import com.gathergrid.gathergridfeatures.service.EventService;
+import com.gathergrid.gathergridfeatures.domain.User;
 import com.gathergrid.gathergridfeatures.domain.Reservation;
 import com.gathergrid.gathergridfeatures.domain.Ticket;
-import com.gathergrid.gathergridfeatures.domain.User;
 import com.gathergrid.gathergridfeatures.service.ReservationService;
 import com.gathergrid.gathergridfeatures.service.TicketService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = {"/myBooking", "/event", "/profile", "/Dashboard","/reservation"})
+@WebServlet(name = "helloServlet", value = {"/myBooking", "/event", "/profile", "/Dashboard","/reservation","/showEvent"})
 public class pagesServlet extends HttpServlet {
 
     TicketService ticketService = new TicketService();
     ReservationService reservationService = new ReservationService();
+    EventService eventService = new EventService();
     public void init() {
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ServletException {
         String path = request.getServletPath();
+        EventService eventService = new EventService();
+        CategoryService categoryService = new CategoryService();
+//        HttpSession session = request.getSession(false);
         switch (path) {
             case "/myBooking":
                 request.setAttribute("url","/myBooking");
                 this.getServletContext().getRequestDispatcher("/WEB-INF/booked.jsp").forward(request, response);
                 break;
             case "/event":
-                this.getServletContext().getRequestDispatcher("/WEB-INF/events.jsp").forward(request, response);
                 request.setAttribute("url","/events");
+                List<Category> categories = categoryService.getAllCategories();
+                List<Event> events = eventService.getAll();
+                request.setAttribute("events", events);
+                request.setAttribute("categories", categories);
+                this.getServletContext().getRequestDispatcher("/WEB-INF/events.jsp").forward(request, response);
                 break;
             case "/profile":
                 this.getServletContext().getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
@@ -40,10 +51,22 @@ public class pagesServlet extends HttpServlet {
                 break;
             case "/Dashboard":
                 request.setAttribute("url","/Dashboard");
+//                User user = (User) session.getAttribute("user");
+                List<Event> listEvent = eventService.fetchAllEventOfUser(1L);
+                request.setAttribute("listEvent",listEvent);
+                List<Category> listCategory = categoryService.getAllCategories();
+                request.setAttribute("listCategory",listCategory);
                 this.getServletContext().getRequestDispatcher("/WEB-INF/homeUser.jsp").forward(request, response);
                 break;
             case "/reservation":
                 ValidationReservation(request, response);
+                break;
+            case "/showEvent":
+                String Id = request.getParameter("id");
+                int idEvent = parseAndValidate(Id);
+                Event event = eventService.findById(idEvent);
+                request.setAttribute("event",event);
+                this.getServletContext().getRequestDispatcher("/WEB-INF/showEvent.jsp").forward(request, response);
                 break;
             default:
                 response.sendError(response.SC_NOT_FOUND);
@@ -62,16 +85,20 @@ public class pagesServlet extends HttpServlet {
     public void ValidationReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String vipParam = request.getParameter("vip");
         String standardParam = request.getParameter("Standard");
-//        String id = request.getParameter("idEvent");
+        String id = request.getParameter("idEvent");
 
         int numVip = parseAndValidate(vipParam);
         int numStandard = parseAndValidate(standardParam);
-//        int idEvent = parseAndValidate(id);
+        int idEvent = parseAndValidate(id);
 
-        List<Ticket> tickets = ticketService.findAllEventTickets(1);
+        List<Ticket> tickets = ticketService.findAllEventTickets(idEvent);
 
         Ticket ticketVip ;
         Ticket ticketStandard ;
+        if (tickets.isEmpty()){
+            request.setAttribute("message","This Event Doesn't have any Tickets !!");
+            this.getServletContext().getRequestDispatcher("/event").forward(request,response);
+        }
         if(tickets.get(0).getType().name().equals("VIP")){
             ticketVip = tickets.get(0);
             ticketStandard = tickets.get(1);
@@ -90,11 +117,11 @@ public class pagesServlet extends HttpServlet {
     private void checkAvailablityOfTypeTicket(Ticket Vip, Ticket Standard,int numStandard,int numVip, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(Vip.getType().name().isEmpty()&&numVip>0){
             request.setAttribute("message","This Event Has Not this Vip Type !!");
-            this.getServletContext().getRequestDispatcher("/test.jsp").forward(request,response);
+            this.getServletContext().getRequestDispatcher("/event").forward(request,response);
         }
         if(Standard.getType().name().isEmpty()&&numStandard>0){
             request.setAttribute("message","This Event Has Not this Standard Type !!");
-            this.getServletContext().getRequestDispatcher("/test.jsp").forward(request,response);
+            this.getServletContext().getRequestDispatcher("/event").forward(request,response);
         }
     }
 
@@ -104,14 +131,14 @@ public class pagesServlet extends HttpServlet {
         //check date
         if(!Vip.getEvent().getDate().isAfter(LocalDateTime.now())|| !Standard.getEvent().getDate().isAfter(LocalDateTime.now())){
             request.setAttribute("message","This Event is Expired !!");
-            this.getServletContext().getRequestDispatcher("/test.jsp").forward(request,response);
+            this.getServletContext().getRequestDispatcher("/event").forward(request,response);
         }else if(Standard.getQuantityAvailable()<numStandard ){
             request.setAttribute("message","Tickets is not Available !!");
-            this.getServletContext().getRequestDispatcher("/test.jsp").forward(request,response);
+            this.getServletContext().getRequestDispatcher("/event").forward(request,response);
         }
         else if(Vip.getQuantityAvailable()<numVip ){
             request.setAttribute("message","Tickets is not Available !!");
-            this.getServletContext().getRequestDispatcher("/test.jsp").forward(request,response);
+            this.getServletContext().getRequestDispatcher("/event").forward(request,response);
         }
         else {
             Reservation reservation = new Reservation(LocalDateTime.now(),user,Vip);
@@ -126,7 +153,7 @@ public class pagesServlet extends HttpServlet {
 
         }
 
-        this.getServletContext().getRequestDispatcher("/test.jsp").forward(request,response);
+        this.getServletContext().getRequestDispatcher("/event").forward(request,response);
     }
     private int parseAndValidate(String param) {
         if (param == null || param.isEmpty()) {

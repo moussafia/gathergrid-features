@@ -7,6 +7,7 @@ import com.gathergrid.gathergridfeatures.repository.TicketRepository;
 import com.gathergrid.gathergridfeatures.repository.interfaces.EventRepository;
 import com.gathergrid.gathergridfeatures.repository.interfacesImpl.EventRepositoryImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,8 +39,10 @@ public class TicketService {
     }
     EventRepositoryImpl eventRepository = new EventRepositoryImpl();
     public List<Ticket> findAllEventTickets(long id){
-        Optional<Event> event = eventRepository.find(id);
-        return event.map(value -> ticketRepository.finAllEventTickets(value.getId())).orElse(null);
+        Event event = eventRepository.find(id);
+        if(event!=null)
+            return  ticketRepository.finAllEventTickets(event.getId());
+        return new ArrayList<>();
     }
 
 }

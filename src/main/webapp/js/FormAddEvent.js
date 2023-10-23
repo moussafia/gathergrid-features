@@ -81,25 +81,10 @@ $(document).ready(function() {
                     `)
         $("#show_item").prepend(newFormTickets)
     }
-    function toggleSideBar() {
-        $("#sideBar").toggleClass('active')
-    }
-
-    function toggleSideBar() {
-        $("#sideBar").toggleClass('active')
-    }
     let optional_config = {
         enableTime: true,
         dateFormat: "Y-m-d H:i",
     }
     $("#dateEvent").flatpickr(optional_config);
 
-})
-
-
-$(document).on("submit","#containerForm-add", function(e){e.preventDefault()
-    $("#containerForm-add").find(":input").each(function(){
-        console.log($(this).val());
-        $(this).prop("disabled",false);
-    })
 })
