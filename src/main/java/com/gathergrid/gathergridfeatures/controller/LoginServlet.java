@@ -95,7 +95,7 @@ public class LoginServlet extends pagesServlet {
             if (user1.isPresent()) {
                 request.getSession(true).setAttribute("user", user1.get());
                 request.setAttribute("success", "You are logged in successfully");
-                this.getServletContext().getRequestDispatcher("/WEB-INF/view/Dashboard.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath()+"/Dashboard");
             } else {
                 request.setAttribute("validationEmail", "Email Or Password Not exists.");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);

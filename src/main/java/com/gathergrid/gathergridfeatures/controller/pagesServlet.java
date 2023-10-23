@@ -1,7 +1,14 @@
 package com.gathergrid.gathergridfeatures.controller;
 
 import java.io.*;
+import java.util.List;
 
+import com.gathergrid.gathergridfeatures.domain.Category;
+import com.gathergrid.gathergridfeatures.domain.Event;
+import com.gathergrid.gathergridfeatures.domain.User;
+import com.gathergrid.gathergridfeatures.repository.interfaces.EventRepository;
+import com.gathergrid.gathergridfeatures.service.CategoryService;
+import com.gathergrid.gathergridfeatures.service.EventService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -13,6 +20,9 @@ public class pagesServlet extends HttpServlet {
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ServletException {
         String path = request.getServletPath();
+        EventService eventService = new EventService();
+        CategoryService categoryService = new CategoryService();
+//        HttpSession session = request.getSession(false);
         switch (path) {
             case "/myBooking":
                 request.setAttribute("url","/myBooking");
@@ -28,6 +38,11 @@ public class pagesServlet extends HttpServlet {
                 break;
             case "/Dashboard":
                 request.setAttribute("url","/Dashboard");
+//                User user = (User) session.getAttribute("user");
+                List<Event> listEvent = eventService.fetchAllEventOfUser(1L);
+                request.setAttribute("listEvent",listEvent);
+                List<Category> listCategory = categoryService.listCategory();
+                request.setAttribute("listCategory",listCategory);
                 this.getServletContext().getRequestDispatcher("/WEB-INF/homeUser.jsp").forward(request, response);
                 break;
             default:

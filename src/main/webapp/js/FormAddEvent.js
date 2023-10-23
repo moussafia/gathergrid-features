@@ -81,13 +81,6 @@ $(document).ready(function() {
                     `)
         $("#show_item").prepend(newFormTickets)
     }
-    function toggleSideBar() {
-        $("#sideBar").toggleClass('active')
-    }
-
-    function toggleSideBar() {
-        $("#sideBar").toggleClass('active')
-    }
     let optional_config = {
         enableTime: true,
         dateFormat: "Y-m-d H:i",

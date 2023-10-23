@@ -17,10 +17,10 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     private TicketType type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Event event;
 
-    @OneToMany(mappedBy = "ticket")
+    @OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER)
     private List<Reservation> reservations = new ArrayList<>();
 
     public Ticket() {}
