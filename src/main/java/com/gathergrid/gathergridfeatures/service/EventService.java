@@ -40,4 +40,16 @@ public class EventService {
     public Event updateEvent(Event event) {
         return eventRepository.update(event);
     }
+
+    public Event findById(long id) {
+        return eventRepository.find(id);
+    }
+
+    public List<Event> getAll() {
+        return eventRepository.findAll();
+    }
+
+    public void delete(Event event) {
+        eventRepository.delete(event.getId());
+    }
 }

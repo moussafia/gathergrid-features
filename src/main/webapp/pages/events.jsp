@@ -1,3 +1,6 @@
+<%@ page import="com.gathergrid.gathergridfeatures.service.CategoryService" %>
+<%@ page import="com.gathergrid.gathergridfeatures.domain.Category" %>
+<%@ page import="java.util.List" %>
 <script src="https://cdn.tailwindcss.com"></script>
 <div class="container mx-auto p-10">
     <!-- filter -->
@@ -30,6 +33,10 @@
                             id="status"
                             class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
                     >
+<%--&lt;%&ndash;                        &lt;%&ndash;%>--%>
+<%--//                            CategoryService categoryService = new CategoryService();--%>
+<%--//                            List<Category> categories = categoryService.getAllCategories();--%>
+<%--&lt;%&ndash;                        %>&ndash;%&gt;--%>
                         <option>Active</option>
                         <option>Pending</option>
                         <option>Deleted</option>
