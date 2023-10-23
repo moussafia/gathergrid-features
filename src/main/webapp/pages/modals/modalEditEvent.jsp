@@ -22,7 +22,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="" id="containerForm-update">
+            <form action="" method="post" id="containerForm-update">
                 <div class="p-6 space-y-4 ">
                     <div>
                         <%--@declare id="first_name"--%><label for="first_name"
@@ -56,41 +56,6 @@
                         Create un ticket</h2>
                 </div>
                 <div id="show_item-updated">
-                    <div class="p-4 flex relative justify-between items-center mx-auto px-8 shadow-md pb-2 pt-2 append_item">
-                        <div class="mx-1">
-                            <%--@declare id="quantity"--%><label for="quantity"
-                                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of ticket
-                            available</label>
-                            <input type="number" name="quantity[]"
-                                   class="quantity-edit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   required>
-                        </div>
-                        <div class="mx-1">
-                            <%--@declare id="type"--%><label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ticket
-                            Type</label>
-                            <select id="type_ticket_updated" name="type[]"
-                                    class="select-type-ticket type_ticket_updated bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="0">VIP </option>
-                                    <option value="1">STUDENT </option>
-                                    <option value="2">SENIOR_CITIZEN </option>
-                                    <option value="3">CHILD</option>
-                            </select>
-                        </div>
-                        <div class="mx-1">
-                            <%--@declare id="price"--%><label for="price"
-                                                              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                            <input type="number" name="price[]" step="0.01"
-                                   class="price-edit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   required>
-                        </div>
-                        <div class="flex relative justify-between items-center mx-auto">
-                            <div class="pl-5 pb-3">
-                                <button type="button" class="mt-10 p-2 bg-cl2 relative border rounded-md hover:bg-hover2 font-bold text-sm add_item_btn_edit">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                     <!--- child here -->
                 </div>
 

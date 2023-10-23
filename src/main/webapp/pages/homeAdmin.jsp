@@ -69,7 +69,7 @@
                         <c:set var="dataTickets" value="["/>
                         <c:forEach items="${event.tickets}" var="ticket" varStatus="loopTickets">
                             <c:set var="delimeter"  value="${not loopTickets.last ? ',' : ']'}" />
-                            <c:set var='ticketJson' value='{"ticketId": "${ticket.id}","ticketPrice":"${ticket.price}" ,"ticketQuantity": "${ticket.quantityAvailable}","ticketType": "${ticket.type.ordinal()}"}${delimeter}' />
+                            <c:set var='ticketJson' value='{"ticketValue": "${ticket.type.name()}","ticketPrice":"${ticket.price}" ,"ticketQuantity": "${ticket.quantityAvailable}","ticketType": "${ticket.type.ordinal()}"}${delimeter}' />
                             <c:set var="dataTickets" value="${dataTickets}${ticketJson}" />
                         </c:forEach>
                         <a href="#" class="edit-event-btn" data-modal-target="modalEditEvent" data-modal-toggle="modalEditEvent"
