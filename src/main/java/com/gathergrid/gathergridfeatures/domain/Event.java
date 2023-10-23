@@ -18,16 +18,16 @@ public class Event {
     @Column(columnDefinition = "Text")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User organizer;
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Ticket> tickets = new ArrayList<>();
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Category category;
 
     public Event() {}
@@ -63,12 +63,22 @@ public class Event {
         this.tickets = tickets;
     }
 
+    public void addTicket(Ticket ticket) {
+        ticket.setEvent(this);
+        tickets.add(ticket);
+    }
+
     public List<Comment> getComments() {
         return comments;
     }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void addComment(Comment comment) {
+        comment.setEvent(this);
+        comments.add(comment);
     }
 
     public Category getCategory() {

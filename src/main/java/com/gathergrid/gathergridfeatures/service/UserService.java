@@ -32,5 +32,8 @@ public class UserService {
         return Optional.empty();
     }
 
+    public User getById(long id) {
+        return userRepository.findById(User.class, id);
+    }
 }
 
