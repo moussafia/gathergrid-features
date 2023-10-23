@@ -87,10 +87,6 @@ public class pagesServlet extends HttpServlet {
 
     }
 
-    private void reduceQuantity(){
-
-    }
-
     private void checkAvailablityOfTypeTicket(Ticket Vip, Ticket Standard,int numStandard,int numVip, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(Vip.getType().name().isEmpty()&&numVip>0){
             request.setAttribute("message","This Event Has Not this Vip Type !!");
