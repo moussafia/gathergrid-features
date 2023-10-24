@@ -10,6 +10,7 @@ import com.gathergrid.gathergridfeatures.utils.EntityManagerUtil;
 import jakarta.persistence.EntityManager;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,14 +73,21 @@ public class EventService {
         return eventRepository.fetchCreatedEventOfUser(user_id);
     }
 
-public List<Event> eventLkk(){
-    List<Event> event = eventRepository.findAll();
-    List<Event> eventFiltred = event.stream().filter(e -> {
-                return e.getTickets().stream().
-                        map(t -> t.getReservations()).collect(Collectors.toList()).size()< 20
-                        && LocalDateTime.now().isAfter(e.getDate());
-    }).collect(Collectors.toList());
-    return eventFiltred;
-}
-
+    public List<Event> filterEvents(String fromDate, String toDate, String name, String categoryId) {
+        LocalDateTime localDateFrom = !fromDate.isBlank() ?
+                LocalDateTime.parse(fromDate + "T00:00:00") :
+                null;
+        LocalDateTime localDateTo = !toDate.isBlank() ?
+                LocalDateTime.parse(toDate + "T00:00:00") :
+                null;
+        Long catId = null;
+        try {
+            catId = !categoryId.isBlank() ?
+                    Long.parseLong(categoryId) :
+                    null;
+        } catch (NumberFormatException e) {
+            return new ArrayList<Event>(); // TODO: change this
+        }
+        return eventRepository.findEventsByCriteria(localDateFrom, localDateTo, name, catId);
+    }
 }

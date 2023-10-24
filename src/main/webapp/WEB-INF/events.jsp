@@ -124,12 +124,12 @@
         <c:import url="../components/navBar.jsp" />
         <div class="container mx-auto p-10">
             <!-- filter -->
-<form class="flex flex-col">
+<form class="flex flex-col" method="get" action="event">
     <div class="bg-white p-6 rounded-xl shadow-lg">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <!-- From Date -->
             <div class="flex flex-col">
-                <label for="fromDate" class="font-medium text-sm text-stone-600">From Date</label>
+                <label for="fromdate" class="font-medium text-sm text-stone-600">From Date</label>
                 <input
                     type="date"
                     id="fromDate"
@@ -140,7 +140,7 @@
 
             <!-- To Date -->
             <div class="flex flex-col">
-                <label for="toDate" class="font-medium text-sm text-stone-600">To Date</label>
+                <label for="todate" class="font-medium text-sm text-stone-600">To Date</label>
                 <input
                     type="date"
                     id="toDate"

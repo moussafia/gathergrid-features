@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.Query;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class EventRepositoryImpl implements EventRepository {
@@ -59,4 +60,20 @@ public class EventRepositoryImpl implements EventRepository {
         return query.getResultList();
     }
 
+    @Override
+    public List<Event> findEventsByCriteria(LocalDateTime fromDate, LocalDateTime toDate, String name, Long categoryId) {
+        String FIND_BY_CRITERIA =
+            "SELECT e FROM Event e " +
+            "WHERE (:fromDate IS NULL OR e.date >= :fromDate) " +
+            "AND (:toDate IS NULL OR e.date <= :toDate) " +
+            "AND (:name IS NULL OR e.name LIKE :name) " +
+            "AND (:categoryId IS NULL OR e.category.id = :categoryId)";
+
+        return em.createQuery(FIND_BY_CRITERIA, Event.class)
+                .setParameter("fromDate", fromDate)
+                .setParameter("toDate", toDate)
+                .setParameter("name", "%" + name + "%")
+                .setParameter("categoryId", categoryId)
+                .getResultList();
+    }
 }

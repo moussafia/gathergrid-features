@@ -35,7 +35,8 @@ public class pagesServlet extends HttpServlet {
             case "/event":
                 request.setAttribute("url","/events");
                 List<Category> categories = categoryService.getAllCategories();
-                List<Event> events = eventService.getAll();
+                List<Event> events = getFiltredEvents(request, response);
+//                List<Event> events = eventService.getAll();
                 request.setAttribute("events", events);
                 request.setAttribute("categories", categories);
                 this.getServletContext().getRequestDispatcher("/WEB-INF/events.jsp").forward(request, response);
@@ -59,8 +60,20 @@ public class pagesServlet extends HttpServlet {
         }
     }
 
-    public void destroy() {
+    private List<Event> getFiltredEvents(HttpServletRequest request, HttpServletResponse response) {
+        EventService eventService = new EventService();
+        String search = request.getParameter("search");
+        if (search == null) {
+            return eventService.filterEvents("", "", "", "");
+        }
+        String fromDate = (String) request.getParameter("fromdate");
+        String toDate = (String) request.getParameter("todate");
+        String text = (String) request.getParameter("text");
+        String categoryId = (String) request.getParameter("category");
+
+        return eventService.filterEvents(fromDate, toDate, text, categoryId);
     }
+
     public static void checkSessionNotEmpty(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if(session==null){
