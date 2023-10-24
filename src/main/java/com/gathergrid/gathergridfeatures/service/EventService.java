@@ -9,7 +9,10 @@ import com.gathergrid.gathergridfeatures.repository.interfacesImpl.EventReposito
 import com.gathergrid.gathergridfeatures.utils.EntityManagerUtil;
 import jakarta.persistence.EntityManager;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EventService {
     private final EventRepository eventRepository;
@@ -55,5 +58,23 @@ public class EventService {
 
     public List<Event> fetchAllEventOfUser(Long user_id){
         return eventRepository.fetchCreatedEventOfUser(user_id);
+    }
+
+    public List<Event> filterEvents(String fromDate, String toDate, String name, String categoryId) {
+        LocalDateTime localDateFrom = !fromDate.isBlank() ?
+                LocalDateTime.parse(fromDate + "T00:00:00") :
+                null;
+        LocalDateTime localDateTo = !toDate.isBlank() ?
+                LocalDateTime.parse(toDate + "T00:00:00") :
+                null;
+        Long catId = null;
+        try {
+            catId = !categoryId.isBlank() ?
+                    Long.parseLong(categoryId) :
+                    null;
+        } catch (NumberFormatException e) {
+            return new ArrayList<Event>(); // TODO: change this
+        }
+        return eventRepository.findEventsByCriteria(localDateFrom, localDateTo, name, catId);
     }
 }
