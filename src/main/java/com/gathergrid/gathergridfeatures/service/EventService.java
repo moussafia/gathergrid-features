@@ -9,7 +9,9 @@ import com.gathergrid.gathergridfeatures.repository.interfacesImpl.EventReposito
 import com.gathergrid.gathergridfeatures.utils.EntityManagerUtil;
 import jakarta.persistence.EntityManager;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EventService {
     private final EventRepository eventRepository;
@@ -24,7 +26,7 @@ public class EventService {
     }
 
     public Event createEvent(Event event, long organizerId, List<Ticket> tickets, long categoryId) {
-        for (Ticket ticket: tickets)
+        for (Ticket ticket : tickets)
             event.addTicket(ticket);
 
         CategoryService categoryService = new CategoryService();
@@ -37,9 +39,9 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public Event updateEvent(long event_id,Event event, long organizerId, List<Ticket> tickets, long categoryId) {
+    public Event updateEvent(long event_id, Event event, long organizerId, List<Ticket> tickets, long categoryId) {
         Event event1 = eventRepository.find(event_id);
-        for(Ticket ticket: tickets)
+        for (Ticket ticket : tickets)
             event.addTicket(ticket);
         CategoryService categoryService = new CategoryService();
         UserService userService = new UserService();
@@ -66,7 +68,18 @@ public class EventService {
         eventRepository.delete(event.getId());
     }
 
-    public List<Event> fetchAllEventOfUser(Long user_id){
+    public List<Event> fetchAllEventOfUser(Long user_id) {
         return eventRepository.fetchCreatedEventOfUser(user_id);
     }
+
+public List<Event> eventLkk(){
+    List<Event> event = eventRepository.findAll();
+    List<Event> eventFiltred = event.stream().filter(e -> {
+                return e.getTickets().stream().
+                        map(t -> t.getReservations()).collect(Collectors.toList()).size()< 20
+                        && LocalDateTime.now().isAfter(e.getDate());
+    }).collect(Collectors.toList());
+    return eventFiltred;
+}
+
 }

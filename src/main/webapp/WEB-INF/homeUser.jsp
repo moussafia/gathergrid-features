@@ -5,7 +5,6 @@
 <c:import url="../components/navBar.jsp" />
 <div id="homeAdmin">
 <c:import url="../pages/homeAdmin.jsp" />
-<c:import url="../pages/modals/modalAdd.jsp" />
 <c:import url="../pages/modals/modalDeleteEvent.jsp" />
 <c:import url="../pages/modals/modalEditEvent.jsp" />
 </div>

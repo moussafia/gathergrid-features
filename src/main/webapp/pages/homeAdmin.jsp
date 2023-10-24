@@ -80,7 +80,7 @@
                             data-ticket="<c:out value="${dataTickets}" />"
                            data-idEvent="<c:out value="${event.id}" />"
                            >Edit</a>
-                        <a class="cursor-pointer" data-modal-target="deleteEvent" data-modal-toggle="deleteEvent">Delete</a>
+                        <a class="cursor-pointer delete-event-btn" data-modal-target="deleteEvent" data-modal-toggle="deleteEvent" data-eventId="<c:out value="${event.id}" />">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
