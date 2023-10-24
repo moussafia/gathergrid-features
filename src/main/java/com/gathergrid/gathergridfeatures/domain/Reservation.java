@@ -25,7 +25,7 @@ public class Reservation {
     public void setReservationDate(LocalDateTime reservationDate) {
         this.reservationDate = reservationDate;
     }
-
+ private  long numbreTickect;
     public Reservation() {}
 
     public Reservation(LocalDateTime reservationDate) {
