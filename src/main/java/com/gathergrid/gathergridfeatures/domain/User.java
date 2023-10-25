@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -122,4 +123,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

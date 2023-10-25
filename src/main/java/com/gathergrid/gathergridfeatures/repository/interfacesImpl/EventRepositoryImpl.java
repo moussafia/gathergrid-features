@@ -2,6 +2,7 @@ package com.gathergrid.gathergridfeatures.repository.interfacesImpl;
 
 import com.gathergrid.gathergridfeatures.domain.Event;
 import com.gathergrid.gathergridfeatures.repository.interfaces.EventRepository;
+import com.gathergrid.gathergridfeatures.utils.EntityManagerUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.Query;
@@ -14,6 +15,10 @@ public class EventRepositoryImpl implements EventRepository {
 
     public EventRepositoryImpl(EntityManager em) {
         this.em = em;
+    }
+
+    public EventRepositoryImpl() {
+        em = EntityManagerUtil.getEntityManager();
     }
 
     @Override

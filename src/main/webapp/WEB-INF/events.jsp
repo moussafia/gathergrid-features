@@ -11,117 +11,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
 <%--        <script src="https://cdn.tailwindcss.com"></script>--%>
-        <style>
-            .logo-color {
-                font-weight: bold;
-                color: #e60023;
-                font-size: 22px;
-                padding-top: 4px;
-                letter-spacing: 1.3px;
-                background-image: linear-gradient(to right, #a61a71, #e02b60);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-
-            #jobs-home nav {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                background: #fff;
-                padding: 15px 15px 10px 30px;
-                border-bottom: 3px solid #e02b60;
-                position: fixed;
-                width: 100%;
-                z-index: 1;
-            }
-            #jobs-home nav .search {
-                display: flex;
-
-                position: relative;
-            }
-            #jobs-home nav .search i {
-                margin-right: 14px;
-                position: absolute;
-                color: #aeb2ba;
-                top: 12px;
-                left: 12px;
-            }
-            #jobs-home nav .search input {
-                border: none;
-                outline: none;
-                font-size: 14px;
-                justify-content: flex-start;
-                align-items: center;
-                border: 2px solid #d7dbe6;
-                border-radius: 24px;
-                height: 40px;
-                width: 61vw;
-                padding: 10px 10px 13px 33px;
-            }
-            #jobs-home nav .profile {
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-            }
-            #jobs-home nav .profile .notification {
-                margin-right: 20px;
-                font-size: 20px;
-                cursor: pointer;
-            }
-            #jobs-home nav .profile .notification:hover {
-                cursor: pointer;
-            }
-            #jobs-home nav .profile img {
-                width: 25px;
-                height: 25px;
-                margin-left: 6px;
-                border-radius: 50%;
-                object-fit: cover;
-            }
-            .n1 {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            #menu-bar {
-                display: none;
-                color: #2b2b2b;
-                font-size: 20px;
-                cursor: pointer;
-                margin-right: 20px;
-            }
-            @media (max-width: 769px) {
-                #menu-bar {
-                    display: initial;
-                }
-                #jobs-home {
-                    width: 100%;
-                    margin-left: 0px;
-                    display: inline-block;
-                }
-                #jobs-home .navigation {
-                    width: 100%;
-                }
-                .values {
-                    padding: 30px 30px 0 30px;
-                    justify-content: flex-start;
-                }
-            }
-            @media (max-width: 586px) {
-                #jobs-home nav {
-                    padding: 15px;
-                }
-                #jobs-home nav .search input {
-                    width: 150px;
-                }
-            }
-        </style>
     </head>
     <body>
         <script src="https://cdn.tailwindcss.com"></script>
-        <c:import url="../components/navBar.jsp" />
         <div class="container mx-auto p-10">
             <!-- filter -->
 <form class="flex flex-col" method="get" action="event">
@@ -197,14 +89,16 @@
         </div>
     </div>
 </form>
-
+            <c:if test="${not empty message}">
+                <p>${message}</p>
+            </c:if>
             <div class="flex flex-wrap -mx-4">
                 <%
                     List<Event> events = (List<Event>) request.getAttribute("events");
                     for (Event event: events) {
                 %>
                 <!-- Card -->
-                <a href="#" class="w-full sm:w-1/2 lg:w-1/3 p-4">
+                <a href="showEvent?id=<%=event.getId()%>" class="w-full sm:w-1/2 lg:w-1/3 p-4">
                     <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-200">
                         <img
                                 class="w-full"

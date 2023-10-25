@@ -30,6 +30,9 @@ public class LoginServlet extends pagesServlet {
 
         if(path.contains("signin"))
             request.getRequestDispatcher("/login.jsp").forward(request, resp);
+        else if(path.contains("ShowEvent")){
+            request.getRequestDispatcher("/WEB-INF/view/showEvent.jsp").forward(request, resp);
+        }
         else if(path.contains("Signup"))
         request.getRequestDispatcher("/registration.jsp").forward(request, resp);
         else if(path.contains("logout")) {
@@ -46,7 +49,8 @@ public class LoginServlet extends pagesServlet {
         String path = request.getRequestURL().toString();
         if(path.contains("signin")){
             login(request,response);
-        }else if(path.contains("Signup")){
+        }
+        else if(path.contains("Signup")){
             register(request,response);
         } else request.getRequestDispatcher("/WEB-INF/view/404.jsp").forward(request, response);
     }
@@ -126,7 +130,7 @@ public class LoginServlet extends pagesServlet {
         List<String> validationErrors = new ArrayList<>();
 
         if (firstName == null || firstName.isBlank()) {
-            validationErrors.add("First name is required.");
+            validationErrors.add("First name is required. ");
         }
 
         if (lastName == null || lastName.isBlank()) {
